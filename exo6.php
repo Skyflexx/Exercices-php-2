@@ -26,8 +26,8 @@
 
             echo "<option value='$value'>$value</option>";
 
-            //<option> créé un élément déroulant dont la value sera affichée via notre variable $value        
-
+            //<option> créé un élément déroulant dont la value sera affichée via notre variable $value      
+            
         };
 
         echo "</select>";
