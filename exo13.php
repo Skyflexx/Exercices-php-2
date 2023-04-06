@@ -92,22 +92,21 @@ class Voiture { // Déclaration de la marque, du modele, du nb de portes, de la 
 
             return "Le véhicule ".$this->marque." ".$this->modele." est stoppé. <br>";
 
-        } else {
-
-            
+        } else {            
 
             return "Le véhicule ".$this->marque." ".$this->modele." est déjà stoppé. <br>";
 
         }
     }
 
-    public function accelerer($acceleration){  
+
+    public function accelerer($vitAcc){  
         
         if ($this->etatVehicule) { // Si le véhicule = true c'est qu'il est démarré. 
 
-            $this->vitesse = ($this->vitesse + $acceleration); // On additionne son accélération à la vitesse actuelle
+            $this->vitesse = ($this->vitesse + $vitAcc); // On additionne son accélération à la vitesse actuelle
 
-            return "le véhicule ".$this->getMarque()." ".$this->getModele()." accélère de ".$acceleration." km/h. <br>";
+            return "le véhicule ".$this->getMarque()." ".$this->getModele()." accélère de ".$vitAcc." km/h. <br>";
 
         } else {
             return "Pour accélerer, il faut démarrer le véhicule ".$this->marque." ! <br>";
@@ -116,7 +115,34 @@ class Voiture { // Déclaration de la marque, du modele, du nb de portes, de la 
     }   
 
 
+    public function deccelerer($vitDecc){  
+        
+        if ($this->etatVehicule) { // Si le véhicule = true c'est qu'il est démarré. 
+
+            // $this->vitesse = ($this->vitesse - $vitDecc); // On soustrait la decceleration à la vitesse actuelle
+
+            if(($this->vitesse - $vitDecc) <0 ){ // Si le VL décellere de 50kmh alors qu'il roule qu'à 30kmh, alors il ne deccelere que de 30kmh.
+
+                return "le véhicule ".$this->getMarque()." ".$this->getModele()." deccélère de ".$this->vitesse." km/h et s'arrête car sa vitesse est nulle. <br>";
+
+                $this->vitesse = 0; // Passage de la vitesse à 0 car il a totalement decceléré.      
+
+            } else{
+
+                $this->vitesse = $this->vitesse - $vitDecc; // Sinon, il deccelere de la vitesse indiquée et la vitesse de decceleration se soustrait à la vitesse initiale.
+
+                return "le véhicule ".$this->getMarque()." ".$this->getModele()." deccélère de ".$vitDecc." km/h. <br>";  
+            }           
+
+        } else {
+            return "Pour deccélérer, il faut que le véhicule ".$this->marque." roule ! <br>"; // S'il n'est pas démarré on indique l'erreur.
+        }        
+
+    }   
+
+
     // -------- Récupération des infos du véhicule -------------
+
 
     public function getInfoVehicule(){       
 
@@ -142,6 +168,9 @@ class Voiture { // Déclaration de la marque, du modele, du nb de portes, de la 
 }
 
 $vehicule1 = new Voiture("Bmw", "Série 1", 3);
+$vehicule2 = new Voiture("Opel", "Corsa", 5);
+
+
 
 echo $vehicule1->demarrer();
 echo $vehicule1->demarrer();
@@ -151,14 +180,16 @@ echo $vehicule1->getNbPortes();
 echo $vehicule1->demarrer();
 echo $vehicule1->getVitesse();
 echo $vehicule1->setVitesse(50);
-echo $vehicule1->getVitesse();
-echo $vehicule1->accelerer(30);
+
+ echo $vehicule1->accelerer(30);
+ echo $vehicule1->deccelerer(20);
+ echo $vehicule1->getVitesse();
 echo $vehicule1->getVitesse();
 echo $vehicule1->getInfoVehicule();
 echo $vehicule1->stopper();
 echo $vehicule1->getInfoVehicule();
 
-$vehicule2 = new Voiture("Opel", "Corsa", 5);
+
 
 echo $vehicule2->demarrer();
 echo $vehicule2->getVitesse();
