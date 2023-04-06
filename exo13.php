@@ -118,9 +118,7 @@ class Voiture { // Déclaration de la marque, du modele, du nb de portes, de la 
     public function deccelerer($vitDecc){  
         
         if ($this->etatVehicule) { // Si le véhicule = true c'est qu'il est démarré. 
-
-            // $this->vitesse = ($this->vitesse - $vitDecc); // On soustrait la decceleration à la vitesse actuelle
-
+            
             if(($this->vitesse - $vitDecc) <0 ){ // Si le VL décellere de 50kmh alors qu'il roule qu'à 30kmh, alors il ne deccelere que de 30kmh.
 
                 return "le véhicule ".$this->getMarque()." ".$this->getModele()." deccélère de ".$this->vitesse." km/h et s'arrête car sa vitesse est nulle. <br>";
