@@ -9,7 +9,7 @@
 
 <?php
 
-$courriel = "elan@@elan-formation.fr";   // Courriel rentré par l'utilisateur
+$courriel = "elan@elan-formation.fr";   // Courriel rentré par l'utilisateur.
 
 testMail($courriel);
 
